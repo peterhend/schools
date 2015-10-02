@@ -1,0 +1,22 @@
+<html>
+<head>
+<!--	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}"> -->
+	</head>
+
+<body>
+
+<h1>New District</h1>
+
+<form action="{{ url_for('newDistrict') }}" method = 'post'>
+
+	<p>Name:</p>
+	<input type='text' size='30' name='name'>
+	<p>Superintendent:</p>
+	<input type='text' size='50' name='superintendent'>
+	<input type='submit' value='Add'>
+
+</form>
+
+</body>
+
+</html>

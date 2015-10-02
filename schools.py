@@ -1,0 +1,114 @@
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from database_setup import Base, District, School, Student, Teacher, Section
+
+app = Flask(__name__)
+
+engine = create_engine('sqlite:///schools.db')
+Base.metadata.bind = engine
+
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
+
+
+@app.route('/')
+@app.route('/districts')
+def showDistricts():
+    #Display all districts
+    districts = session.query(District).all()
+    return render_template('districts.html', districts=districts)
+
+@app.route('/districts/new', methods=['GET', 'POST'])
+def newDistrict():
+    #Create new district
+    if request.method == 'POST':
+        newDistrict = District(name=request.form['name'], superintendent=request.form['superintendent'])
+        session.add(newDistrict)
+        session.commit()
+        return redirect(url_for('showDistricts'))
+    else:
+        return render_template('newdistrict.html')
+
+@app.route('/districts/<int:district_id>/delete', methods=['GET', 'POST'])
+def deleteDistrict(district_id):
+    district = session.query(District).filter_by(id=district_id).one()
+    if request.method == 'POST':
+        session.delete(district)
+        session.commit()
+        return redirect(url_for('showDistricts'))
+    else:
+        return render_template('deletedistrict.html', item=district)
+
+@app.route('/districts/<int:district_id>/')
+def showDistrict(district_id):
+    #Display all schools within selected district
+    district = session.query(District).filter_by(id=district_id).one()
+    schools = session.query(School).filter_by(district_id=district_id).all()
+    return render_template('district.html', schools=schools, district=district)
+
+@app.route('/districts/<int:district_id>/new', methods=['GET', 'POST'])
+def newSchool(district_id):
+    #Create new school within selected district
+    if request.method == 'POST':
+        newSchool = School(name=request.form['name'], principal=request.form['principal'], district_id=district_id)
+        session.add(newSchool)
+        session.commit()
+        return redirect(url_for('showSchools', district_id=district_id))
+    else:
+        return render_template('newschool.html', district_id=district_id)
+
+
+@app.route('/districts/<int:district_id>/<int:school_id>/edit', methods=['GET', 'POST'])
+def editSchool(district_id, school_id):
+    #return "Page to edit a school"
+    school = session.query(School).filter_by(id=school_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            editedItem.name = request.form['name']
+        if request.form['principal']:
+            editedItem.description = request.form['principal']
+        session.add(school)
+        session.commit()
+        return redirect(url_for('showSchools', district_id=district_id))
+    else:
+        return render_template(
+            'editschool.html', district_id=district_id, school_id=school_id, item=school)
+
+
+@app.route('/districts/<int:district_id>/schools/<int:school_id>/delete', methods=['GET', 'POST'])
+def deleteSchool(district_id, school_id):
+    #return "Page to delete a school"
+    school = session.query(School).filter_by(id=school_id).one()
+    if request.method == 'POST':
+        session.delete(school)
+        session.commit()
+        return redirect(url_for('showSchools', district_id=district_id))
+    else:
+        return render_template('deleteschool.html', item=school)
+
+@app.route('/districts/<int:district_id>/schools/<int:school_id>/')
+def showSchool(district_id, school_id):
+    school = session.query(School).filter_by(id=school_id).one()
+    students = session.query(Student).filter_by(school_id=school_id).all()
+    teachers = session.query(Teacher).filter_by(school_id=school_id).all()
+    sections = session.query(Section).filter_by(school_id=school_id).all()
+    return render_template('school.html', district_id=district_id, school=school, students=students, teachers=teachers, sections=sections)
+
+@app.route('/districts/<int:district_id>/schools/<int:school_id>/section/<int:section_id>/')
+def showSection(district_id, school_id, section_id):
+    section = session.query(Section).filter_by(id=section_id).one()
+    teacher = session.query(Teacher).filter_by(id=section.teacher_id).one()
+    students = session.query(Student).filter_by(school_id=school_id).all()
+    return render_template('section.html',
+                           district_id=district_id,
+                           school_id=school_id,
+                           section=section,
+                           teacher=teacher,
+                           students=students)
+
+
+if __name__ == '__main__':
+    print "Hello"
+    app.debug = True
+    app.run()

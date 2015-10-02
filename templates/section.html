@@ -1,0 +1,20 @@
+<html>
+<head>
+	</head>
+
+<body>
+
+<h1>{{section.name}}</h1>
+<h2>Teacher</h2>
+<p>{{teacher.first_name}} {{teacher.last_name}}</p>
+
+<h2>Students</h2>
+{% for student in students %}
+
+	<p>{{student.first_name}} {{student.last_name}}</p>
+
+{% endfor %}
+
+</body>
+
+</html>

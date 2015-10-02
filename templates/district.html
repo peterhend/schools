@@ -1,0 +1,19 @@
+<html>
+<head>
+	</head>
+
+<body>
+
+<h1>{{district.name}}</h1>
+<p>Superintendent: {{district.superintendent}}<br>
+Address: {{district.address}}, {{district.city}}, {{district.state}} {{district.zip}}<br>
+Phone: {{district.phone}}</p>
+
+{% for school in schools %}
+
+	<p><a href='{{url_for('showSchool', district_id=school.district_id, school_id=school.id)}}'>{{school.name}}</a></p>
+
+{% endfor %}
+</body>
+
+</html>

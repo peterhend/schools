@@ -1,0 +1,19 @@
+<html>
+<head>
+	</head>
+
+<body>
+
+<h1>All Districts</h1>
+
+<p><a href='{{url_for('newDistrict')}}'>Add new district</a></p>
+{% for district in districts %}
+
+	<p><a href='{{url_for('showDistrict', district_id=district.id)}}'>{{district.name}}</a><br>
+	<a href='{{url_for('deleteDistrict', district_id=district.id)}}'>Delete</a><br><br>
+
+
+{% endfor %}
+</body>
+
+</html>
