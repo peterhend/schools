@@ -28,6 +28,16 @@ class School(Base):
     district_id = Column(Integer, ForeignKey('district.id'))
     district = relationship(District)
 
+    # We added this serialize function to be able to send JSON objects in a
+    # serializable format
+    @property
+    def serialize(self):
+
+        return {
+            'name': self.name,
+            'principal': self.principal,
+        }
+
 class Student(Base):
     __tablename__ = 'student'
 
@@ -66,19 +76,6 @@ class Enrollment(Base):
     section = relationship(Section)
     student_id = Column(Integer, ForeignKey('student.id'))
     student = relationship(Student)
-
-# We added this serialize function to be able to send JSON objects in a
-# serializable format
-##    @property
-##    def serialize(self):
-##
-##        return {
-##            'name': self.name,
-##            'description': self.description,
-##            'id': self.id,
-##            'price': self.price,
-##            'course': self.course,
-##        }
 
 engine = create_engine('sqlite:///schools.db')
 

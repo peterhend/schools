@@ -180,5 +180,3 @@ session.commit()
 
 
 print "Added %s" % district1.name
-students = session.query(Student).filter_by(last_name='Von Rosk').all()
-print(students)

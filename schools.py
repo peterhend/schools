@@ -95,6 +95,12 @@ def showSchool(district_id, school_id):
     sections = session.query(Section).filter_by(school_id=school_id).all()
     return render_template('school.html', district_id=district_id, school=school, students=students, teachers=teachers, sections=sections)
 
+# JSON API ENDPOINT
+@app.route('/districts/<int:district_id>/schools/<int:school_id>/JSON')
+def schoolJSON(district_id, school_id):
+    school = session.query(School).filter_by(id=school_id).one()
+    return jsonify(School=school.serialize) 
+
 @app.route('/districts/<int:district_id>/schools/<int:school_id>/sections/<int:section_id>/')
 def showSection(district_id, school_id, section_id):
     section = session.query(Section).filter_by(id=section_id).one()
