@@ -8,22 +8,22 @@
 <h2>Students</h2>
 {% for student in students %}
 
-	<p>{{student.first_name}} {{student.last_name}}</p>
+	<p><a href='{{url_for('showStudent', district_id=district_id, school_id=school.id, student_id=student.id)}}'>{{student.first_name}} {{student.last_name}}</a></p>
+
 
 {% endfor %}
 
 <h2>Teachers</h2>
 {% for teacher in teachers %}
 
-	<p>{{teacher.first_name}} {{teacher.last_name}}</p>
+	<p><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.first_name}} {{teacher.last_name}}</a></p>
 
 {% endfor %}
 
 <h2>Sections</h2>
 {% for section in sections %}
 
-	<p>{{section.name}}</p>
-		<p><a href='{{url_for('showSection', district_id=district_id, school_id=school.id, section_id=section.id)}}'>{{section.name}}</a></p>
+	<p><a href='{{url_for('showSection', district_id=district_id, school_id=school.id, section_id=section.id)}}'>{{section.name}}</a></p>
 
 {% endfor %}
 </body>

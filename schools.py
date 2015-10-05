@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, District, School, Student, Teacher, Section
+from database_setup import Base, District, School, Student, Teacher, Section, Enrollment
 
 app = Flask(__name__)
 
@@ -95,17 +95,37 @@ def showSchool(district_id, school_id):
     sections = session.query(Section).filter_by(school_id=school_id).all()
     return render_template('school.html', district_id=district_id, school=school, students=students, teachers=teachers, sections=sections)
 
-@app.route('/districts/<int:district_id>/schools/<int:school_id>/section/<int:section_id>/')
+@app.route('/districts/<int:district_id>/schools/<int:school_id>/sections/<int:section_id>/')
 def showSection(district_id, school_id, section_id):
     section = session.query(Section).filter_by(id=section_id).one()
     teacher = session.query(Teacher).filter_by(id=section.teacher_id).one()
-    students = session.query(Student).filter_by(school_id=school_id).all()
+    students = section.students
     return render_template('section.html',
                            district_id=district_id,
                            school_id=school_id,
                            section=section,
                            teacher=teacher,
                            students=students)
+
+@app.route('/districts/<int:district_id>/schools/<int:school_id>/students/<int:student_id>/')
+def showStudent(district_id, school_id, student_id):
+    student = session.query(Student).filter_by(id=student_id).one()
+    sections = student.sections
+    return render_template('student.html',
+                           district_id=district_id,
+                           school_id=school_id,
+                           student=student,
+                           sections=sections)
+
+@app.route('/districts/<int:district_id>/schools/<int:school_id>/teachers/<int:teacher_id>/')
+def showTeacher(district_id, school_id, teacher_id):
+    teacher = session.query(Teacher).filter_by(id=teacher_id).one()
+    sections = session.query(Section).filter_by(teacher_id=teacher_id)
+    return render_template('teacher.html',
+                           district_id=district_id,
+                           school_id=school_id,
+                           teacher=teacher,
+                           sections=sections)
 
 
 if __name__ == '__main__':

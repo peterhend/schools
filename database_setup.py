@@ -36,6 +36,7 @@ class Student(Base):
     last_name = Column(String(40), nullable=False)
     school_id = Column(Integer, ForeignKey('school.id'))
     school = relationship(School)
+    sections = relationship('Section', secondary='enrollment')
 
 class Teacher(Base):
     __tablename__ = 'teacher'
@@ -55,6 +56,7 @@ class Section(Base):
     school = relationship(School)
     teacher_id = Column(Integer, ForeignKey('teacher.id'))
     teacher = relationship(Teacher)
+    students = relationship('Student', secondary='enrollment')
 
 class Enrollment(Base):
     __tablename__ = 'enrollment'

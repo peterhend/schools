@@ -166,5 +166,17 @@ enrollment = Enrollment(section=section9, student=student9)
 session.add(enrollment)
 session.commit()
 
+enrollment = Enrollment(section=section7, student=student1)
+session.add(enrollment)
+session.commit()
+
+enrollment = Enrollment(section=section7, student=student2)
+session.add(enrollment)
+session.commit()
+
+enrollment = Enrollment(section=section7, student=student3)
+session.add(enrollment)
+session.commit()
+
 
 print "Added %s" % district1.name
