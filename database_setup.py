@@ -25,17 +25,25 @@ class School(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
     principal = Column(String(250))
+    address = Column(String(50))
+    city = Column(String(50))
+    state = Column(String(50))
+    zip = Column(String(50))
+    phone = Column(String(50))
     district_id = Column(Integer, ForeignKey('district.id'))
     district = relationship(District)
 
-    # We added this serialize function to be able to send JSON objects in a
-    # serializable format
+    # Serialize function to send JSON objects in a serializable format
     @property
     def serialize(self):
-
         return {
             'name': self.name,
             'principal': self.principal,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zip': self.zip,
+            'phone': self.phone,
         }
 
 class Student(Base):
@@ -44,9 +52,28 @@ class Student(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(40), nullable=False)
     last_name = Column(String(40), nullable=False)
+    address = Column(String(50))
+    city = Column(String(50))
+    state = Column(String(50))
+    zip = Column(String(50))
+    phone = Column(String(50))
+    email = Column(String(50))
     school_id = Column(Integer, ForeignKey('school.id'))
     school = relationship(School)
     sections = relationship('Section', secondary='enrollment')
+
+    # Serialize function to send JSON objects in a serializable format
+    @property
+    def serialize(self):
+        return {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zip': self.zip,
+            'phone': self.phone,
+        }
 
 class Teacher(Base):
     __tablename__ = 'teacher'
@@ -54,8 +81,27 @@ class Teacher(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(40), nullable=False)
     last_name = Column(String(40), nullable=False)
+    address = Column(String(50))
+    city = Column(String(50))
+    state = Column(String(50))
+    zip = Column(String(50))
+    phone = Column(String(50))
+    email = Column(String(50))
     school_id = Column(Integer, ForeignKey('school.id'))
     school = relationship(School)
+
+    # Serialize function to send JSON objects in a serializable format
+    @property
+    def serialize(self):
+        return {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zip': self.zip,
+            'phone': self.phone,
+        }
 
 class Section(Base):
     __tablename__ = 'section'
@@ -68,6 +114,15 @@ class Section(Base):
     teacher = relationship(Teacher)
     students = relationship('Student', secondary='enrollment')
 
+    # Serialize function to send JSON objects in a serializable format
+    @property
+    def serialize(self):
+        return {
+            'name': self.name,
+            'teacher_first_name': self.teacher.first_name,
+            'teacher_last_name': self.teacher.last_name,
+        }
+
 class Enrollment(Base):
     __tablename__ = 'enrollment'
 
@@ -79,5 +134,5 @@ class Enrollment(Base):
 
 engine = create_engine('sqlite:///schools.db')
 
-Base.metadata.drop_all(engine)
+#Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)

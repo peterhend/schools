@@ -1,0 +1,17 @@
+<html>
+<head>
+	</head>
+
+<body>
+
+<h1>Sections at {{school.name}}</h1>
+
+{% for section in sections %}
+
+	<p><a href='{{url_for('showSection', district_id=district_id, school_id=school.id, section_id=section.id)}}'>{{section.name}}</a></p>
+
+{% endfor %}
+
+</body>
+
+</html>

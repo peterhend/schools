@@ -1,0 +1,17 @@
+<html>
+<head>
+	</head>
+
+<body>
+
+<h1>Students at {{school.name}}</h1>
+
+{% for student in students %}
+
+	<p><a href='{{url_for('showStudent', district_id=district_id, school_id=school.id, student_id=student.id)}}'>{{student.first_name}} {{student.last_name}}</a></p>
+
+{% endfor %}
+
+</body>
+
+</html>
