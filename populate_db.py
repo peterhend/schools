@@ -1,11 +1,14 @@
 import csv
 import random
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from database_setup import Base, District, School, Student, Teacher, Section, Enrollment
 
-engine = create_engine('sqlite:///schools.db')
+db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
+engine = create_engine('sqlite:///' + db_path)
+#engine = create_engine('sqlite:///schools.db')
 # Bind the engine to the metadata of the Base class so that the
 # declaratives can be accessed through a DBSession instance
 Base.metadata.bind = engine
