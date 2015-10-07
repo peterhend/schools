@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
 engine = create_engine('sqlite:///' + db_path)
-#engine = create_engine('sqlite:///schools.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -18,7 +17,6 @@ session = DBSession()
 @app.route('/') 
 @app.route('/districts')
 def showDistricts():
-    #Display all districts
     districts = session.query(District).all()
     return render_template('districts.html', districts=districts)
 
@@ -32,6 +30,31 @@ def newDistrict():
         return redirect(url_for('showDistricts'))
     else:
         return render_template('newdistrict.html')
+
+@app.route('/districts/<int:district_id>/edittt', methods=['GET', 'POST'])
+def editttDistrict(district_id):
+    district = session.query(District).filter_by(id=district_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            editedItem.name = request.form['name']
+        if request.form['superintendent']:
+            editedItem.description = request.form['superintendent']
+        if request.form['address']:
+            editedItem.price = request.form['address']
+        if request.form['city']:
+            editedItem.course = request.form['city']
+        if request.form['state']:
+            editedItem.course = request.form['state']
+        if request.form['zip']:
+            editedItem.course = request.form['zip']
+        if request.form['phone']:
+            editedItem.course = request.form['phone']
+        session.add(editedItem)
+        session.commit()
+        session.commit()
+        return redirect(url_for('showDistricts'))
+    else:
+        return render_template('editdistrict.html', item=district)
 
 @app.route('/districts/<int:district_id>/delete', methods=['GET', 'POST'])
 def deleteDistrict(district_id):

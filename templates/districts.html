@@ -1,20 +1,23 @@
 <html>
 <head>
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-	</head>
+</head>
 
 <body>
 
-<h1>All Districts</h1>
+<h2>All Districts</h2>
 
-<p><a href='{{url_for('newDistrict')}}'>Add new district</a></p>
+<table style="width:50%">
 {% for district in districts %}
-
-	<p><a href='{{url_for('showDistrict', district_id=district.id)}}'>{{district.name}}</a><br>
-	<a href='{{url_for('deleteDistrict', district_id=district.id)}}'>Delete</a><br><br>
-
-
+	<tr>
+	    <td><a href='{{url_for('showDistrict', district_id=district.id)}}'>{{district.name}}</a></td>
+	    <td><a href='{{url_for('editDistrict', district_id=district.id)}}'>Edit</a></td>
+	    <td><a href='{{url_for('deleteDistrict', district_id=district.id)}}'>Delete</a></td>
+	</tr>
 {% endfor %}
+</table> 
+<p>&nbsp;</p>
+<p><a href='{{url_for('newDistrict')}}'>Add new district</a></p>
 </body>
 
 </html>
