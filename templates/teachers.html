@@ -1,6 +1,7 @@
 <html>
 <head>
-	</head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
 
 <body>
 
@@ -8,7 +9,7 @@
 
 {% for teacher in teachers %}
 
-	<p><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.first_name}} {{teacher.last_name}}</a></p>
+	<p><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></p>
 
 {% endfor %}
 

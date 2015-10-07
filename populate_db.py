@@ -1,3 +1,5 @@
+import csv
+import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -21,169 +23,128 @@ session = DBSession()
 session.query(District).delete()
 session.query(School).delete()
 session.query(Student).delete()
+session.query(Teacher).delete()
+session.query(Section).delete()
+session.query(Enrollment).delete()
 
-# Haldane
 district1 = District(
-    name="Haldane Central School District",
-    superintendent="Diana Bowers",
+    name="Craigside School District",
+    superintendent="Clarence West",
     address="15 Craigside Drive",
-    city="Cold Spring",
+    city="New York",
     state="NY",
-    zip="10516",
-    phone="(845) 265-9254")
+    zip="10002",
+    phone="(646) 784-9230")
 session.add(district1)
 session.commit()
 
 school1 = School(
-    name="Haldane Elementary School",
-    principal="Brent Harrington",
+    name="Craigside Elementary School",
+    principal="Catherine Cook",
     address="15 Craigside Drive",
-    city="Cold Spring",
+    city="New York",
     state="NY",
-    zip="10516",
-    phone="(845) 265-9254",
+    zip="10002",
+    phone="(646) 784-9254",
     district=district1)
 session.add(school1)
 
 school2 = School(
-    name="Haldane Middle School",
-    principal="Julia Sniffen",
+    name="Craigside Middle School",
+    principal="Adam Reed",
     address="15 Craigside Drive",
-    city="Cold Spring",
+    city="New York",
     state="NY",
-    zip="10516",
-    phone="(845) 265-9254",
+    zip="10002",
+    phone="(646) 784-2314",
     district=district1)
 session.add(school2)
 
 school3 = School(
-    name="Haldane High School",
-    principal="Brian Alm",
+    name="Craigside High School",
+    principal="Angela Lopez",
     address="15 Craigside Drive",
-    city="Cold Spring",
+    city="New York",
     state="NY",
-    zip="10516",
-    phone="(845) 265-9254",
+    zip="10002",
+    phone="(646) 784-8034",
     district=district1)
 session.add(school3)
 
-student1 = Student(first_name="James", last_name="Franco", school=school3)
-session.add(student1)
+schools = [school1, school2, school3]
 
-student2 = Student(first_name="Cameron", last_name="Diaz", school=school3)
-session.add(student2)
+with open('student_data.csv', 'rb') as f:
+    reader = csv.reader(f)
+    data = list(reader)
 
-student3 = Student(first_name="Sean", last_name="Connery", school=school3)
-session.add(student3)
-
-student4 = Student(first_name="Peter", last_name="Frampton", school=school3)
-session.add(student4)
-
-student5 = Student(first_name="Mick", last_name="Jagger", school=school3)
-session.add(student5)
-
-student6 = Student(first_name="Pete", last_name="Townsend", school=school3)
-session.add(student6)
-
-student7 = Student(first_name="Peter", last_name="Henderson", school=school3)
-session.add(student7)
-
-student8 = Student(first_name="Cameron", last_name="Henderson", school=school3)
-session.add(student8)
-
-student9 = Student(first_name="Nancy", last_name="Von Rosk", school=school3)
-session.add(student9)
-
-teacher1 = Teacher(first_name="Kathy", last_name="Battersby", school=school3)
-session.add(teacher1)
-
-teacher2 = Teacher(first_name="Judy", last_name="Finehirsh", school=school3)
-session.add(teacher2)
-
-teacher3 = Teacher(first_name="Jennifer", last_name="Windells", school=school3)
-session.add(teacher3)
-
-teacher4 = Teacher(first_name="Jeff", last_name="Sniffen", school=school3)
-session.add(teacher4)
-
-teacher5 = Teacher(first_name="PJ", last_name="Keiding", school=school3)
-session.add(teacher5)
-
-teacher6 = Teacher(first_name="Katelyn", last_name="Yen", school=school3)
-session.add(teacher6)
-
-teacher7 = Teacher(first_name="Bob", last_name="Mack", school=school3)
-session.add(teacher7)
-
-teacher8 = Teacher(first_name="Nancy", last_name="Martinez", school=school3)
-session.add(teacher8)
-
-teacher9 = Teacher(first_name="Eric", last_name="Richter", school=school3)
-session.add(teacher9)
-
-section1 = Section(name="Algebra I", school=school3, teacher=teacher2)
-session.add(section1)
-
-section2 = Section(name="Algebra II/Trig", school=school3, teacher=teacher3)
-session.add(section2)
-
-section3 = Section(name="Geometry", school=school3, teacher=teacher1)
-session.add(section3)
-
-section4 = Section(name="Intro to Calculus", school=school3, teacher=teacher5)
-session.add(section4)
-
-section5 = Section(name="English 8", school=school3, teacher=teacher4)
-session.add(section5)
-
-section6 = Section(name="English 9", school=school3, teacher=teacher6)
-session.add(section6)
-
-section7 = Section(name="English Regents", school=school3, teacher=teacher7)
-session.add(section7)
-
-section8 = Section(name="AP English Language", school=school3, teacher=teacher9)
-session.add(section8)
-
-section9 = Section(name="AP English Literature", school=school3, teacher=teacher8)
-session.add(section9)
-
-enrollment = Enrollment(section=section1, student=student1)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section1, student=student2)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section1, student=student3)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section2, student=student4)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section2, student=student5)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section2, student=student6)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section7, student=student1)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section7, student=student2)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section7, student=student3)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section9, student=student7)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section9, student=student8)
-session.add(enrollment)
-
-enrollment = Enrollment(section=section9, student=student9)
-session.add(enrollment)
-
+for i in data:
+    student = Student(
+        first_name = i[1],
+        last_name = i[2],
+        email = i[3],
+        address = i[4],
+        city = i[5],
+        state = i[6],
+        zip = i[7],
+        phone = i[8][2:],
+        school = random.choice(schools)
+    )
+    session.add(student)
 session.commit()
+print "Added students"
+    
+with open('teacher_data.csv', 'rb') as f:
+    reader = csv.reader(f)
+    data = list(reader)
+
+for i in data:
+    teacher = Teacher(
+        first_name = i[1],
+        last_name = i[2],
+        email = i[3],
+        address = i[4],
+        city = i[5],
+        state = i[6],
+        zip = i[7],
+        phone = i[8][2:],
+        school = random.choice(schools)
+    )
+    session.add(teacher)
+session.commit()
+print "Added teachers"
+
+with open('section_data.csv', 'rb') as f:
+    reader = csv.reader(f)
+    data = list(reader)
+teachers = session.query(Teacher).filter_by(school_id=3).all()
+teacher_count = len(teachers)
+counter = 0
+for i in data:
+    section = Section(
+        name = i[1],
+        teacher = teachers[counter%teacher_count],
+        school = schools[2]
+    )
+    session.add(section)
+    counter += 1
+session.commit()
+print "Added HS sections"
+
+students = session.query(Student).filter_by(school_id=3).order_by(Student.address).all()
+student_count = len(students)
+counter = 0
+for i in range(0, session.query(Section).count()):
+    section = session.query(Section).filter_by(id=i+1).one()
+    for j in range(0, 20):
+        enrollment = Enrollment(
+            section = section,
+            student = students[counter%student_count]
+        )
+        session.add(enrollment)
+        counter += 1
+session.commit()
+print "Added enrollments"
 
 print "Added %s" % district1.name
+
+session.close()
