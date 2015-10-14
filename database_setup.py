@@ -18,6 +18,25 @@ class District(Base):
     state = Column(String(50))
     zip = Column(String(50))
     phone = Column(String(50))
+    schools = relationship('School')
+
+    # Serialize function to send JSON objects in a serializable format
+    @property
+    def serialize(self):
+        return {
+            'name': self.name,
+            'superintendent': self.superintendent,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zip': self.zip,
+            'phone': self.phone,
+            'schools': self.serialize_schools
+        }
+
+    @property
+    def serialize_schools(self):
+        return [item.serialize for item in self.schools]
 
 class School(Base):
     __tablename__ = 'school'
