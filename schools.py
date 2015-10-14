@@ -72,11 +72,11 @@ def showDistrict(district_id):
     schools = session.query(School).filter_by(district_id=district_id).all()
     return render_template('district.html', schools=schools, district=district)
 
-# JSON API ENDPOINT
-@app.route('/districts/<int:district_id>/JSON')
-def districtJSON(district_id):
-    district = session.query(District).filter_by(id=district_id).one()
-    return jsonify(District=district.serialize) 
+### JSON API ENDPOINT
+##@app.route('/districts/<int:district_id>/JSON')
+##def districtJSON(district_id):
+##    district = session.query(District).filter_by(id=district_id).one()
+##    return jsonify(District=district.serialize) 
 
 @app.route('/districts/<int:district_id>/new', methods=['GET', 'POST'])
 def newSchool(district_id):
