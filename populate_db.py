@@ -22,7 +22,7 @@ DBSession = sessionmaker(bind=engine)
 # revert all of them back to the last commit by calling
 # session.rollback()
 session = DBSession()
-
+ 
 session.query(District).delete()
 session.query(School).delete()
 session.query(Student).delete()
