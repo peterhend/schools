@@ -18,7 +18,7 @@ class District(Base):
     state = Column(String(50))
     zip = Column(String(50))
     phone = Column(String(50))
-    #schools = relationship('School')
+    schools = relationship('School')
 
     # Serialize function to send JSON objects in a serializable format
     @property
@@ -31,7 +31,7 @@ class District(Base):
             'state': self.state,
             'zip': self.zip,
             'phone': self.phone,
-            #'schools': self.serialize_schools,
+            'schools': self.serialize_schools,
         }
 
     @property
@@ -50,7 +50,7 @@ class School(Base):
     zip = Column(String(50))
     phone = Column(String(50))
     district_id = Column(Integer, ForeignKey('district.id'))
-    district = relationship(District)
+    district = relationship('District')
 
     # Serialize function to send JSON objects in a serializable format
     @property
@@ -107,7 +107,7 @@ class Teacher(Base):
     phone = Column(String(50))
     email = Column(String(50))
     school_id = Column(Integer, ForeignKey('school.id'))
-    school = relationship(School)
+    school = relationship('School')
 
     # Serialize function to send JSON objects in a serializable format
     @property
@@ -149,7 +149,7 @@ class Enrollment(Base):
     section_id = Column(Integer, ForeignKey('section.id'))
     section = relationship(Section)
     student_id = Column(Integer, ForeignKey('student.id'))
-    student = relationship(Student)
+    student = relationship('Student')
 
 db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
 engine = create_engine('sqlite:///' + db_path)
