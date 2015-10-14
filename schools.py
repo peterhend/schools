@@ -7,7 +7,8 @@ from database_setup import Base, District, School, Student, Teacher, Section, En
 app = Flask(__name__)
 
 db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
-engine = create_engine('sqlite:///' + db_path)
+#engine = create_engine('sqlite:///' + db_path)
+engine = create_engine('sqlite:///schools.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -22,7 +23,6 @@ def showDistricts():
 
 @app.route('/districts/new', methods=['GET', 'POST'])
 def newDistrict():
-    #Create new district
     if request.method == 'POST':
         newDistrict = District(name=request.form['name'], superintendent=request.form['superintendent'])
         session.add(newDistrict)
@@ -31,30 +31,29 @@ def newDistrict():
     else:
         return render_template('newdistrict.html')
 
-@app.route('/districts/<int:district_id>/edittt', methods=['GET', 'POST'])
-def editttDistrict(district_id):
+@app.route('/districts/<int:district_id>/edit', methods=['GET', 'POST'])
+def editDistrict(district_id):
     district = session.query(District).filter_by(id=district_id).one()
     if request.method == 'POST':
         if request.form['name']:
-            editedItem.name = request.form['name']
+            district.name = request.form['name']
         if request.form['superintendent']:
-            editedItem.description = request.form['superintendent']
+            district.superintendent = request.form['superintendent']
         if request.form['address']:
-            editedItem.price = request.form['address']
+            district.address = request.form['address']
         if request.form['city']:
-            editedItem.course = request.form['city']
+            district.city = request.form['city']
         if request.form['state']:
-            editedItem.course = request.form['state']
+            district.state = request.form['state']
         if request.form['zip']:
-            editedItem.course = request.form['zip']
+            district.zip = request.form['zip']
         if request.form['phone']:
-            editedItem.course = request.form['phone']
-        session.add(editedItem)
-        session.commit()
+            district.phone = request.form['phone']
+        session.add(district)
         session.commit()
         return redirect(url_for('showDistricts'))
     else:
-        return render_template('editdistrict.html', item=district)
+        return render_template('editdistrict.html', district=district)
 
 @app.route('/districts/<int:district_id>/delete', methods=['GET', 'POST'])
 def deleteDistrict(district_id):
@@ -210,6 +209,5 @@ def allTeachersJSON(district_id, school_id):
 
 
 if __name__ == '__main__':
-    print "Hello"
     app.debug = True
     app.run()
