@@ -43,6 +43,7 @@ class School(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
+    type = Column(String(250))
     principal = Column(String(250))
     address = Column(String(50))
     city = Column(String(50))
@@ -56,6 +57,7 @@ class School(Base):
     @property
     def serialize(self):
         return {
+            'id': self.id,
             'name': self.name,
             'principal': self.principal,
             'address': self.address,
@@ -71,6 +73,7 @@ class Student(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(40), nullable=False)
     last_name = Column(String(40), nullable=False)
+    grade = Column(String(50))
     address = Column(String(50))
     city = Column(String(50))
     state = Column(String(50))
@@ -85,8 +88,10 @@ class Student(Base):
     @property
     def serialize(self):
         return {
+            'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'grade': self.grade,
             'address': self.address,
             'city': self.city,
             'state': self.state,
@@ -100,6 +105,7 @@ class Teacher(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(40), nullable=False)
     last_name = Column(String(40), nullable=False)
+    department = Column(String(50))
     address = Column(String(50))
     city = Column(String(50))
     state = Column(String(50))
@@ -113,13 +119,16 @@ class Teacher(Base):
     @property
     def serialize(self):
         return {
+            'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'department': self.department,
             'address': self.address,
             'city': self.city,
             'state': self.state,
             'zip': self.zip,
             'phone': self.phone,
+            'email': self.email,
         }
 
 class Section(Base):
@@ -137,6 +146,7 @@ class Section(Base):
     @property
     def serialize(self):
         return {
+            'id': self.id,
             'name': self.name,
             'teacher_first_name': self.teacher.first_name,
             'teacher_last_name': self.teacher.last_name,
@@ -155,5 +165,5 @@ db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
 engine = create_engine('sqlite:///' + db_path)
 #engine = create_engine('sqlite:///schools.db')
 
-#Base.metadata.drop_all(engine)
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)

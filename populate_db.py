@@ -43,6 +43,7 @@ session.commit()
 
 school1 = School(
     name="Craigside Elementary School",
+    type="ES",
     principal="Catherine Cook",
     address="15 Craigside Drive",
     city="New York",
@@ -54,6 +55,7 @@ session.add(school1)
 
 school2 = School(
     name="Craigside Middle School",
+    type="MS",
     principal="Adam Reed",
     address="15 Craigside Drive",
     city="New York",
@@ -65,6 +67,7 @@ session.add(school2)
 
 school3 = School(
     name="Craigside High School",
+    type="HS",
     principal="Angela Lopez",
     address="15 Craigside Drive",
     city="New York",
@@ -75,12 +78,24 @@ school3 = School(
 session.add(school3)
 
 schools = [school1, school2, school3]
+es_departments = ["Kindergarten", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Art & Music"]
+hs_departments = ["English", "Mathematics", "Social Studies", "Foreign Language", "Science", "Art & Music", "Physical Education", "Home & Careers"]
+es_grades = ["K", 1, 2, 3, 4, 5]
+ms_grades = [6, 7, 8]
+hs_grades = [9, 10, 11, 12]
 
 with open('student_data.csv', 'rb') as f:
     reader = csv.reader(f)
     data = list(reader)
 
 for i in data:
+    school = random.choice(schools)
+    if (school.type == "ES"):
+        grade = random.choice(es_grades)
+    elif (school.type == "MS"):
+        grade = random.choice(ms_grades)
+    elif (school.type == "HS"):
+        grade = random.choice(hs_grades)
     student = Student(
         first_name = i[1],
         last_name = i[2],
@@ -90,7 +105,8 @@ for i in data:
         state = i[6],
         zip = i[7],
         phone = i[8][2:],
-        school = random.choice(schools)
+        grade = grade,
+        school = school
     )
     session.add(student)
 session.commit()
@@ -101,16 +117,24 @@ with open('teacher_data.csv', 'rb') as f:
     data = list(reader)
 
 for i in data:
+    school = random.choice(schools)
+    if (school.type == "ES"):
+        department = random.choice(es_departments)
+    elif (school.type == "MS"):
+        department = random.choice(hs_departments)
+    elif (school.type == "HS"):
+        department = random.choice(hs_departments)
     teacher = Teacher(
         first_name = i[1],
         last_name = i[2],
+        department = department,
         email = i[3],
         address = i[4],
         city = i[5],
         state = i[6],
         zip = i[7],
         phone = i[8][2:],
-        school = random.choice(schools)
+        school = school
     )
     session.add(teacher)
 session.commit()
