@@ -41,43 +41,64 @@ district1 = District(
 session.add(district1)
 session.commit()
 
-school1 = School(
-    name="Craigside Elementary School",
-    type="ES",
-    principal="Catherine Cook",
-    address="15 Craigside Drive",
-    city="New York",
-    state="NY",
-    zip="10002",
-    phone="(646) 784-9254",
-    district=district1)
-session.add(school1)
+with open('school_data.csv', 'rb') as f:
+    reader = csv.reader(f)
+    data = list(reader)
 
-school2 = School(
-    name="Craigside Middle School",
-    type="MS",
-    principal="Adam Reed",
-    address="15 Craigside Drive",
-    city="New York",
-    state="NY",
-    zip="10002",
-    phone="(646) 784-2314",
-    district=district1)
-session.add(school2)
+for i in data:
+    school = School(
+        name = i[1],
+        type = i[2],
+        principal = i[3],
+        address = i[4],
+        city = i[5],
+        state = i[6],
+        zip = i[7],
+        phone = i[8],
+        district = district1)
+    session.add(school)
+    print school.name
+session.commit()
+print "Added schools"
+    
+##school1 = School(
+##    name="Craigside Elementary School",
+##    type="ES",
+##    principal="Catherine Cook",
+##    address="15 Craigside Drive",
+##    city="New York",
+##    state="NY",
+##    zip="10002",
+##    phone="(646) 784-9254",
+##    district=district1)
+##session.add(school1)
+##
+##school2 = School(
+##    name="Craigside Middle School",
+##    type="MS",
+##    principal="Adam Reed",
+##    address="15 Craigside Drive",
+##    city="New York",
+##    state="NY",
+##    zip="10002",
+##    phone="(646) 784-2314",
+##    district=district1)
+##session.add(school2)
+##
+##school3 = School(
+##    name="Craigside High School",
+##    type="HS",
+##    principal="Angela Lopez",
+##    address="15 Craigside Drive",
+##    city="New York",
+##    state="NY",
+##    zip="10002",
+##    phone="(646) 784-8034",
+##    district=district1)
+##session.add(school3)
 
-school3 = School(
-    name="Craigside High School",
-    type="HS",
-    principal="Angela Lopez",
-    address="15 Craigside Drive",
-    city="New York",
-    state="NY",
-    zip="10002",
-    phone="(646) 784-8034",
-    district=district1)
-session.add(school3)
-
-schools = [school1, school2, school3]
+schools = session.query(School).filter_by(district_id=district1.id).all()
+##schools = [school1, school2, school3]
 es_departments = ["Kindergarten", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Art & Music"]
 hs_departments = ["English", "Mathematics", "Social Studies", "Foreign Language", "Science", "Art & Music", "Physical Education", "Home & Careers"]
 es_grades = ["K", 1, 2, 3, 4, 5]
