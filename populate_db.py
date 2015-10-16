@@ -147,10 +147,16 @@ teachers = session.query(Teacher).filter_by(school_id=3).all()
 teacher_count = len(teachers)
 counter = 0
 for i in data:
+    if (i[2] == "ES"):
+        school = schools[0]
+    if (i[2] == "MS"):
+        school = schools[1]
+    if (i[2] == "HS"):
+        school = schools[2]
     section = Section(
         name = i[1],
         teacher = teachers[counter%teacher_count],
-        school = schools[2]
+        school = school
     )
     session.add(section)
     counter += 1
