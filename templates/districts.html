@@ -7,7 +7,6 @@
 <table class="table table-striped" style="width:50%">
 {% for district in districts %}
 	<tr>
-	    <td><a onclick="setHelpText('{{district.name}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 	    <td><a href='{{url_for('showDistrict', district_id=district.id)}}'>{{district.name}}</a></td>
 	    <td><a href='{{url_for('editDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Edit</a></td>
 	    <td><a href='{{url_for('deleteDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Delete</a></td>
@@ -16,9 +15,8 @@
 </table>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<table style="width:50%">
+<table class="table" style="width:50%">
 	<tr>
-	    <td><a onclick="setHelpText('Add new district')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 	    <td><a href='{{url_for('newDistrict')}}' class="btn btn-primary">Add new district</a></td>
 	    <td></td>
 	    <td></td>

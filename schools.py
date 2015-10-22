@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_bootstrap import Bootstrap
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, District, School, Student, Teacher, Section, Enrollment
+from database_setup import Base, District, School, Student, Teacher, Section, Enrollment, HelpTopic
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -54,7 +54,8 @@ def editDistrict(district_id):
         session.commit()
         return redirect(url_for('showDistricts'))
     else:
-        return render_template('editdistrict.html', district=district)
+        helpTopics = session.query(HelpTopic).filter_by(window="Edit District").all()
+        return render_template('editdistrict.html', helpTopics=helpTopics, district=district)
 
 @app.route('/districts/<int:district_id>/delete', methods=['GET', 'POST'])
 def deleteDistrict(district_id):

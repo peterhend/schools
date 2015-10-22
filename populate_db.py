@@ -4,7 +4,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database_setup import Base, District, School, Student, Teacher, Section, Enrollment
+from database_setup import Base, District, School, Student, Teacher, Section, Enrollment, HelpTopic
 
 db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
 engine = create_engine('sqlite:///' + db_path)
@@ -200,5 +200,20 @@ session.commit()
 print "Added enrollments"
 
 print "Added %s" % district1.name
+
+with open('help_topics.csv', 'rb') as f:
+    reader = csv.reader(f)
+    data = list(reader)
+
+for i in data:
+    helpTopic = HelpTopic(
+        help_id = i[0],
+        window = i[1],
+        element = i[2],
+        text = i[3],
+    )
+    session.add(helpTopic)
+session.commit()
+print "Added help topics"
 
 session.close()
