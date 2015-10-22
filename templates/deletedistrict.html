@@ -3,12 +3,15 @@
 
 {% block content %}
 <h3>Are you sure you want to delete {{item.name}}?</h3>
+<p>&nbsp;</p>
 
 <form action="{{ url_for('deleteDistrict', district_id=item.id) }}" method = 'post'>
-
-	<input type='submit' value='Delete'>
-
+<table style="width:50%">
+<tr>
+	<td><a class="btn btn-primary" href='{{url_for('showDistricts')}}'>Cancel</a></td>
+	<td align="right"><input class="btn btn-primary" type='submit' value='Delete'></td>
+</tr>
+</table>
 </form>
-<p><a href='{{url_for('showDistricts')}}'>Cancel</a></p>
 
 {% endblock %}

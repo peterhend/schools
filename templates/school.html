@@ -7,10 +7,9 @@
 Address: {{school.address}}, {{school.city}}, {{school.state}} {{school.zip}}<br>
 Phone: {{school.phone}}</p>
 
-<p><a href='{{url_for('showAllStudents', district_id=district_id, school_id=school.id)}}'>View students</a></p>
-
-<p><a href='{{url_for('showAllTeachers', district_id=district_id, school_id=school.id)}}'>View teachers</a></p>
-
-<p><a href='{{url_for('showAllSections', district_id=district_id, school_id=school.id)}}'>View sections</a></p>
+<p>&nbsp;</p>
+	<a  class="btn btn-primary" href='{{url_for('showAllStudents', district_id=district_id, school_id=school.id)}}'>View students</a>&nbsp;&nbsp;
+	<a  class="btn btn-primary" href='{{url_for('showAllTeachers', district_id=district_id, school_id=school.id)}}'>View teachers</a>&nbsp;&nbsp;
+	<a  class="btn btn-primary" href='{{url_for('showAllSections', district_id=district_id, school_id=school.id)}}'>View sections</a>
 
 {% endblock %}
