@@ -1,18 +1,16 @@
-<html>
-<head>
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-</head>
+{% extends "base.html" %}
+{% block title %} Districts {% endblock %}
 
-<body>
+{% block content %}
 
-<h1>Teachers at {{school.name}}</h1>
+<h3>Teachers at {{school.name}}</h3>
 
+<table class="table table-striped" style="width:50%">
 {% for teacher in teachers %}
-
-	<p><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></p>
-
+<tr>
+	<td><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></td>
+</tr>
 {% endfor %}
+</table>
 
-</body>
-
-</html>
+{% endblock %}

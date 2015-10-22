@@ -1,10 +1,12 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_bootstrap import Bootstrap
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, District, School, Student, Teacher, Section, Enrollment
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
 engine = create_engine('sqlite:///' + db_path)
@@ -13,7 +15,6 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
-
 
 @app.route('/') 
 @app.route('/districts')

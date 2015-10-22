@@ -1,12 +1,8 @@
-<html>
-<head>
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-</head>
+{% extends "base.html" %}
+{% block title %} Districts {% endblock %}
 
-<body>
-
-<h1>Edit District</h1>
-
+{% block content %}
+<h3>Edit District</h3>
 <form action="{{ url_for('editDistrict', district_id=district.id) }}" method = 'post'>
 
 	<p>Name:</p>
@@ -28,6 +24,4 @@
 </form>
 <p><a href='{{url_for('showDistricts')}}'>Cancel</a></p>
 
-</body>
-
-</html>
+{% endblock %}
