@@ -25,12 +25,21 @@ def showDistricts():
 @app.route('/districts/new', methods=['GET', 'POST'])
 def newDistrict():
     if request.method == 'POST':
-        newDistrict = District(name=request.form['name'], superintendent=request.form['superintendent'])
+        newDistrict = District(
+            name=request.form['name'],
+            superintendent=request.form['superintendent'],
+            address=request.form['address'],
+            city=request.form['city'],
+            state=request.form['state'],
+            zip=request.form['zip'],
+            phone=request.form['phone']
+            )
         session.add(newDistrict)
         session.commit()
         return redirect(url_for('showDistricts'))
     else:
-        return render_template('newdistrict.html')
+        helpTopics = session.query(HelpTopic).filter_by(window="Edit District").all()
+        return render_template('newdistrict.html', helpTopics=helpTopics)
 
 @app.route('/districts/<int:district_id>/edit', methods=['GET', 'POST'])
 def editDistrict(district_id):

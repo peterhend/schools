@@ -8,8 +8,11 @@
 {% for district in districts %}
 	<tr>
 	    <td><a href='{{url_for('showDistrict', district_id=district.id)}}'>{{district.name}}</a></td>
-	    <td><a href='{{url_for('editDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Edit</a></td>
-	    <td><a href='{{url_for('deleteDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Delete</a></td>
+	    <td align="right">
+	    	<a href='{{url_for('editDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Edit</a>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<a href='{{url_for('deleteDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Delete</a>
+	    </td>
 	</tr>
 {% endfor %}
 </table>
