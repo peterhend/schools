@@ -13,7 +13,9 @@
 {{super()}}
 <script>
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
+    if(!('ontouchstart' in window)) {
+      $('[data-toggle="popover"]').popover();
+    }
 });
 function setHelpText() {
     document.getElementById("helpText").innerHTML = arguments[0];
