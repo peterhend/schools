@@ -8,8 +8,8 @@ Address: {{school.address}}, {{school.city}}, {{school.state}} {{school.zip}}<br
 Phone: {{school.phone}}</p>
 
 <p>&nbsp;</p>
-	<a  class="btn btn-primary" href='{{url_for('showAllStudents', district_id=district_id, school_id=school.id)}}'>View students</a>&nbsp;&nbsp;
-	<a  class="btn btn-primary" href='{{url_for('showAllTeachers', district_id=district_id, school_id=school.id)}}'>View teachers</a>&nbsp;&nbsp;
-	<a  class="btn btn-primary" href='{{url_for('showAllSections', district_id=district_id, school_id=school.id)}}'>View sections</a>
+	<a  class="btn btn-primary" href='{{url_for('showAllStudents', district_id=district_id, school_id=school.id)}}'>Students</a>&nbsp;&nbsp;
+	<a  class="btn btn-primary" href='{{url_for('showAllTeachers', district_id=district_id, school_id=school.id)}}'>Teachers</a>&nbsp;&nbsp;
+	<a  class="btn btn-primary" href='{{url_for('showAllSections', district_id=district_id, school_id=school.id)}}'>Sections</a>
 
 {% endblock %}
