@@ -1,16 +1,11 @@
 {% extends "base.html" %}
+
 {% block title %} Districts {% endblock %}
 
 {% block header %}
 {% endblock %}
 
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
-});
-</script>
 
 <h3>Edit District</h3>
 <form action="{{ url_for('editDistrict', district_id=district.id) }}" method = 'post'>
@@ -18,38 +13,38 @@ $(document).ready(function(){
 <table class="table" style="width: 0%;">
 <tr>
 	<td>Name:</td>
-	<td><input type='text' size='50' name='name' value='{{district.name}}'></td>
-    <td><a onclick="setHelpText('{{helpTopics[0].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[1]}}" type='text' size='50' name='name' value='{{district.name}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[1]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>Superintendent:</td>
-	<td><input type='text' size='50' name='superintendent' value='{{district.superintendent}}'></td>
-    <td><a onclick="setHelpText('{{helpTopics[1].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[2]}}" type='text' size='50' name='superintendent' value='{{district.superintendent}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[2]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>Address:</td>
-	<td><input type='text' size='50' name='address' value='{{district.address}}'></td>
-    <td><a onclick="setHelpText('{{helpTopics[2].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[3]}}" type='text' size='50' name='address' value='{{district.address}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[3]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>City:</td>
-	<td><input type='text' size='50' name='city' value='{{district.city}}'></td>
-    <td><a onclick="setHelpText('{{helpTopics[3].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[4]}}" type='text' size='50' name='city' value='{{district.city}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[4]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>State:</td>
-	<td><input type='text' size='50' name='state' value='{{district.state}}'></td>
-    <td><a onclick="setHelpText('{{helpTopics[4].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[5]}}" type='text' size='50' name='state' value='{{district.state}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[5]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
  	<td>Zip:</td>
-	<td><input type='text' size='50' name='zip' value='{{district.zip}}'></td>
-    <td><a onclick="setHelpText('{{helpTopics[5].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[6]}}" type='text' size='50' name='zip' value='{{district.zip}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[6]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>Phone:</td>
-	<td><input type='text' size='50' name='phone' value='{{district.phone}}'></td>
-    <td><a onclick="setHelpText('{{helpTopics[6].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[7]}}" type='text' size='50' name='phone' value='{{district.phone}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[7]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr style="padding-top: 40px;">
 	<td>&nbsp;</td>

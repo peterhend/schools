@@ -10,8 +10,10 @@
 
 {% block scripts %}
 {{super()}}
-<script src="{{url_for('.static', filename='scripts.js')}}"></script>
 <script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
 function setHelpText() {
     document.getElementById("helpText").innerHTML = arguments[0];
 }

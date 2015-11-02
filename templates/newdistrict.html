@@ -9,46 +9,45 @@
 <table class="table" style="width: 0%;">
 <tr>
 	<td>Name:</td>
-	<td><input type='text' size='50' name='name'></td>
-    <td><a onclick="setHelpText('{{helpTopics[0].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[1]}}" type='text' size='50' name='name'}}'></td>
+    <td><a onclick="setHelpText('{{helpTopics[1]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>Superintendent:</td>
-	<td><input type='text' size='50' name='superintendent'></td>
-    <td><a onclick="setHelpText('{{helpTopics[1].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[2]}}" type='text' size='50' name='superintendent''></td>
+    <td><a onclick="setHelpText('{{helpTopics[2]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>Address:</td>
-	<td><input type='text' size='50' name='address'></td>
-    <td><a onclick="setHelpText('{{helpTopics[2].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[3]}}" type='text' size='50' name='address'></td>
+    <td><a onclick="setHelpText('{{helpTopics[3]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>City:</td>
-	<td><input type='text' size='50' name='city'></td>
-    <td><a onclick="setHelpText('{{helpTopics[3].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[4]}}" type='text' size='50' name='city'></td>
+    <td><a onclick="setHelpText('{{helpTopics[4]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>State:</td>
-	<td><input type='text' size='50' name='state'></td>
-    <td><a onclick="setHelpText('{{helpTopics[4].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[5]}}" type='text' size='50' name='state'></td>
+    <td><a onclick="setHelpText('{{helpTopics[5]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
-	<td>Zip:</td>
-	<td><input type='text' size='50' name='zip'></td>
-    <td><a onclick="setHelpText('{{helpTopics[5].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+ 	<td>Zip:</td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[6]}}" type='text' size='50' name='zip'></td>
+    <td><a onclick="setHelpText('{{helpTopics[6]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
 <tr>
 	<td>Phone:</td>
-	<td><input type='text' size='50' name='phone'></td>
-    <td><a onclick="setHelpText('{{helpTopics[6].text}}')" href='#' data-toggle="modal" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
+	<td><input data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="{{helpTopics[7]}}" type='text' size='50' name='phone'></td>
+    <td><a onclick="setHelpText('{{helpTopics[7]}}')" href='#' data-toggle="modal" data-html="true" data-target="#help" class="btn btn-primary btn-xs">?</a></td>
 </tr>
-
 <tr style="padding-top: 40px;">
 	<td>&nbsp;</td>
 	<td align="right">
 		<a href='{{url_for('showDistricts')}}' class="btn btn-primary">Cancel</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type='submit' value='Add' class="btn btn-primary">
+		<input type='submit' value='Save' class="btn btn-primary">
 	</td>
 	<td>&nbsp;</td>
 </tr>

@@ -4,6 +4,27 @@
 
 {% block content %}
 <h3>Teachers at {{school.name}}</h3>
+<table class="table table-striped">
+{% for teacher in teachers %}
+<tr>
+	<td>
+		<table style="width:50%">
+			<tr>
+				<td style="width:50%"><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></td>
+				<td style="width:50%; margin-left:50px;">{{teacher.email}}</td>
+			</tr>
+			<tr>
+				<td style="width:50%">{{teacher.department}}</td>
+				<td style="width:50%; margin-left:50px;">{{teacher.phone}}</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+{% endfor %}
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 {% for teacher in teachers %}
 <div class="container">
@@ -18,26 +39,5 @@
     </div>
 </div>
 {% endfor %}
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<table class="table table-striped">
-{% for teacher in teachers %}
-<tr>
-	<td>
-		<table style="width:100%">
-			<tr>
-				<td style="width:50%"><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></td>
-				<td style="width:50%">{{teacher.email}}</td>
-			</tr>
-			<tr>
-				<td class="details">{{teacher.department}}</td>
-				<td>{{teacher.phone}}</td>
-			</tr>
-		</table>
-	</td>
-</tr>
-{% endfor %}
-</table>
 
 {% endblock %}

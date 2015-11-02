@@ -29,6 +29,7 @@ session.query(Student).delete()
 session.query(Teacher).delete()
 session.query(Section).delete()
 session.query(Enrollment).delete()
+session.query(HelpTopic).delete()
 
 district1 = District(
     name="Craigside School District",

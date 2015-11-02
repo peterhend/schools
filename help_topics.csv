@@ -1,5 +1,5 @@
-1,Edit District,Name,Help topic for Name field
-2,Edit District,Superintendent,Help topic for Superintendent field
+1,Edit District,Name,<p>Help topic for Name field</p><p><strong>Lorem</strong> ipsum</p>
+2,Edit District,Superintendent,Help topic for Superintendent field<br/><strong>Lorem</strong> ipsum
 3,Edit District,Address,Help topic for Address field
 4,Edit District,City,Help topic for City field
 5,Edit District,State,Help topic for State field

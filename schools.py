@@ -39,7 +39,10 @@ def newDistrict():
         return redirect(url_for('showDistricts'))
     else:
         helpTopics = session.query(HelpTopic).filter_by(window="Edit District").all()
-        return render_template('newdistrict.html', helpTopics=helpTopics)
+        helpDict = {}
+        for topic in helpTopics:
+            helpDict[topic.id] = topic.text
+        return render_template('newdistrict.html', helpTopics=helpDict)
 
 @app.route('/districts/<int:district_id>/edit', methods=['GET', 'POST'])
 def editDistrict(district_id):
@@ -64,7 +67,10 @@ def editDistrict(district_id):
         return redirect(url_for('showDistricts'))
     else:
         helpTopics = session.query(HelpTopic).filter_by(window="Edit District").all()
-        return render_template('editdistrict.html', helpTopics=helpTopics, district=district)
+        helpDict = {}
+        for topic in helpTopics:
+            helpDict[topic.id] = topic.text
+        return render_template('editdistrict.html', helpTopics=helpDict, district=district)
 
 @app.route('/districts/<int:district_id>/delete', methods=['GET', 'POST'])
 def deleteDistrict(district_id):
