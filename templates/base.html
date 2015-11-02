@@ -1,12 +1,24 @@
 {% extends "bootstrap/base.html" %}
 
-{% block navbar %}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='styles.css')}}">
+<style>
+.details {font-size:85%; }
+}</style>
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('.static', filename='scripts.js')}}"></script>
 <script>
 function setHelpText() {
     document.getElementById("helpText").innerHTML = arguments[0];
 }
 </script>
+{% endblock %}
 
+{% block navbar %}
 <!-- Modal -->
 <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

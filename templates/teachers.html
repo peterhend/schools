@@ -1,14 +1,41 @@
 {% extends "base.html" %}
+
 {% block title %} Districts {% endblock %}
 
 {% block content %}
-
 <h3>Teachers at {{school.name}}</h3>
 
-<table class="table table-striped" style="width:50%">
+{% for teacher in teachers %}
+<div class="container">
+    <!--Row with two equal columns-->
+    <div class="row" style="border-top: 1px solid #d0d0d0; padding-top: 5px;">
+        <div class="col-sm-6"><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></div>
+        <div class="col-sm-6">{{teacher.email}}</div>
+    </div>
+    <div class="row" style="padding-bottom: 5px;">
+        <div class="col-sm-6" style="font-size:85%;">{{teacher.department}}</div>
+        <div class="col-sm-6">{{teacher.phone}}</div>
+    </div>
+</div>
+{% endfor %}
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table class="table table-striped">
 {% for teacher in teachers %}
 <tr>
-	<td><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></td>
+	<td>
+		<table style="width:100%">
+			<tr>
+				<td style="width:50%"><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></td>
+				<td style="width:50%">{{teacher.email}}</td>
+			</tr>
+			<tr>
+				<td class="details">{{teacher.department}}</td>
+				<td>{{teacher.phone}}</td>
+			</tr>
+		</table>
+	</td>
 </tr>
 {% endfor %}
 </table>

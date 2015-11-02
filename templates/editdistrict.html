@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-<h3>Edit District</h3>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -13,6 +12,7 @@ $(document).ready(function(){
 });
 </script>
 
+<h3>Edit District</h3>
 <form action="{{ url_for('editDistrict', district_id=district.id) }}" method = 'post'>
 
 <table class="table" style="width: 0%;">

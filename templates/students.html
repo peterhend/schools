@@ -8,7 +8,18 @@
 <table class="table table-striped" style="width:50%">
 {% for student in students %}
 <tr>
-	<td><a href='{{url_for('showStudent', district_id=district_id, school_id=school.id, student_id=student.id)}}'>{{student.last_name}}, {{student.first_name}}</a></td>
+	<td>
+		<table style="width:100%">
+			<tr>
+				<td style="width:50%"><a href='{{url_for('showStudent', district_id=district_id, school_id=school.id, student_id=student.id)}}'>{{student.last_name}}, {{student.first_name}}</a></td>
+				<td style="width:50%">{{student.email}}</td>
+			</tr>
+			<tr>
+				<td class="details">Grade {{student.grade}}</td>
+				<td>{{student.phone}}</td>
+			</tr>
+		</table>
+	</td>
 </tr>
 {% endfor %}
 </table>
