@@ -4,13 +4,13 @@
 {% block content %}
 <h3>All Districts</h3>
 
-<table class="table table-striped" style="width:50%">
+<table class="table table-striped" style="width:0">
 {% for district in districts %}
 	<tr>
 	    <td><a href='{{url_for('showDistrict', district_id=district.id)}}'>{{district.name}}</a></td>
-	    <td align="right">
+	    <td style="padding-left:50px;">
 	    	<a href='{{url_for('editDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Edit</a>
-	    	&nbsp;&nbsp;&nbsp;&nbsp;
+	    	&nbsp;&nbsp;
 	    	<a href='{{url_for('deleteDistrict', district_id=district.id)}}' class="btn btn-primary btn-xs">Delete</a>
 	    </td>
 	</tr>
@@ -18,11 +18,5 @@
 </table>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<table class="table" style="width:50%">
-	<tr>
-	    <td><a href='{{url_for('newDistrict')}}' class="btn btn-primary">Add new district</a></td>
-	    <td></td>
-	    <td></td>
-	</tr>
-</table> 
+<a href='{{url_for('newDistrict')}}' class="btn btn-primary">Add new district</a> 
 {% endblock %}
