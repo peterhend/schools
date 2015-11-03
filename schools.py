@@ -9,6 +9,7 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
 db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schools.db')
+templates_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 engine = create_engine('sqlite:///' + db_path)
 #engine = create_engine('sqlite:///schools.db')
 Base.metadata.bind = engine
@@ -40,7 +41,7 @@ def newHelpTopic():
         session.commit()
         return redirect(url_for('helpTopics'))
     else:
-        pages = os.listdir("templates")
+        pages = os.listdir(templates_path)
         return render_template('newhelptopic.html', pages=pages)
 
 @app.route('/help/<int:help_id>/edit', methods=['GET', 'POST'])
@@ -63,7 +64,7 @@ def editHelpTopic(help_id):
             session.commit()
         return redirect(url_for('helpTopics'))
     else:
-        pages = os.listdir("templates")
+        pages = os.listdir(templates_path)
         return render_template('edithelptopic.html', topic=topic, pages=pages)
 
 @app.route('/districts/new', methods=['GET', 'POST'])
