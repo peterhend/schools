@@ -7,9 +7,9 @@
 <table class="table table-striped" style="width:0">
 {% for topic in helpTopics %}
 	<tr>
-	    <td><a href='{{url_for('editHelpTopic', help_id=topic.id)}}'>{{topic.help_id}}</a></td>
+	    <td><a class="underline" href='{{url_for('editHelpTopic', help_id=topic.id)}}'>{{topic.help_id}}</a></td>
 	    <td>{{topic.window}}</td>
-	    <td><a href='{{url_for('editHelpTopic', help_id=topic.id)}}'>{{topic.element}}</a></td>
+	    <td>{{topic.element}}</td>
 	    <td>{{topic.text}}</td>
 	</tr>
 {% endfor %}
