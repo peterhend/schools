@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %} Help Topics {% endblock %}
+
+{% block content %}
+<h3>Help Topics</h3>
+
+<table class="table table-striped" style="width:0">
+{% for topic in helpTopics %}
+	<tr>
+	    <td><a href='{{url_for('editHelpTopic', help_id=topic.id)}}'>{{topic.help_id}}</a></td>
+	    <td>{{topic.window}}</td>
+	    <td><a href='{{url_for('editHelpTopic', help_id=topic.id)}}'>{{topic.element}}</a></td>
+	    <td>{{topic.text}}</td>
+	</tr>
+{% endfor %}
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<a href='{{url_for('newHelpTopic')}}' class="btn btn-primary">Add new help topic</a> 
+{% endblock %}

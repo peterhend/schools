@@ -1,7 +1,7 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, Markup
 from flask_bootstrap import Bootstrap
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, District, School, Student, Teacher, Section, Enrollment, HelpTopic
 
@@ -22,6 +22,50 @@ def showDistricts():
     districts = session.query(District).all()
     return render_template('districts.html', districts=districts)
 
+@app.route('/help')
+def helpTopics():
+    helpTopics = session.query(HelpTopic).order_by(HelpTopic.help_id)
+    return render_template('help.html', helpTopics=helpTopics)
+
+@app.route('/help/new', methods=['GET', 'POST'])
+def newHelpTopic():
+    if request.method == 'POST':
+        newTopic = HelpTopic(
+            help_id=request.form['help_id'],
+            window=request.form['window'],
+            element=request.form['element'],
+            text=request.form['text']
+            )
+        session.add(newTopic)
+        session.commit()
+        return redirect(url_for('helpTopics'))
+    else:
+        pages = os.listdir("templates")
+        return render_template('newhelptopic.html', pages=pages)
+
+@app.route('/help/<int:help_id>/edit', methods=['GET', 'POST'])
+def editHelpTopic(help_id):
+    topic = session.query(HelpTopic).filter_by(id=help_id).one()
+    if request.method == 'POST':
+        if request.form['submit'] == 'Save':
+            if request.form['help_id']:
+                topic.help_id = request.form['help_id']
+            if request.form['window']:
+                topic.window = request.form['window']
+            if request.form['element']:
+                topic.element = request.form['element']
+            if request.form['text']:
+                topic.text = request.form['text']
+            session.add(topic)
+            session.commit()
+        elif request.form['submit'] == 'Delete':
+            session.delete(topic)
+            session.commit()
+        return redirect(url_for('helpTopics'))
+    else:
+        pages = os.listdir("templates")
+        return render_template('edithelptopic.html', topic=topic, pages=pages)
+
 @app.route('/districts/new', methods=['GET', 'POST'])
 def newDistrict():
     if request.method == 'POST':
@@ -38,7 +82,7 @@ def newDistrict():
         session.commit()
         return redirect(url_for('showDistricts'))
     else:
-        helpTopics = session.query(HelpTopic).filter_by(window="Edit District").all()
+        helpTopics = session.query(HelpTopic).filter_by(window="editdistrict.html").all()
         helpDict = {}
         for topic in helpTopics:
             helpDict[topic.help_id] = [topic.element, topic.text]
@@ -66,7 +110,7 @@ def editDistrict(district_id):
         session.commit()
         return redirect(url_for('showDistricts'))
     else:
-        helpTopics = session.query(HelpTopic).filter_by(window="Edit District").all()
+        helpTopics = session.query(HelpTopic).filter_by(window="editdistrict.html").all()
         helpDict = {}
         for topic in helpTopics:
             helpDict[topic.help_id] = [topic.element, topic.text]

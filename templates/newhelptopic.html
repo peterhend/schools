@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %} Edit Help Topic {% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+<h3>New Help Topic</h3>
+<form action="{{ url_for('newHelpTopic') }}" method = 'post'>
+
+<table class="table" style="width: 0;">
+<tr>
+	<td style="vertical-align:middle">Help ID:</td>
+	<td><input class="form-control" type='text' size='50' name='help_id'></td>
+</tr>
+<tr>
+	<td style="vertical-align:middle">Page:</td>
+	<td>
+		<select class="form-control" name="window">
+			{% for page in pages %}
+	    		<option value="{{page}}">{{page}}</option>
+			{% endfor %}
+		</select>
+	</td>
+</tr>
+<tr>
+	<td style="vertical-align:middle">Element:</td>
+	<td><input class="form-control" type='text' size='50' name='element'></td>
+</tr>
+<tr>
+	<td style="vertical-align:middle">Text:</td>
+	<td><textarea class="form-control" name="text" cols="40" rows="10"></textarea></td>
+</tr>
+
+<tr style="padding-top: 40px;">
+	<td>&nbsp;</td>
+	<td align="right">
+		<a href='{{url_for('helpTopics')}}' class="btn btn-primary">Cancel</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='submit' name='submit' value='Save' class="btn btn-primary">
+	</td>
+</tr>
+</table>
+
+</form>
+
+{% endblock %}

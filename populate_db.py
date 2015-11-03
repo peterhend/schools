@@ -29,7 +29,7 @@ session.query(Student).delete()
 session.query(Teacher).delete()
 session.query(Section).delete()
 session.query(Enrollment).delete()
-session.query(HelpTopic).delete()
+##session.query(HelpTopic).delete()
 
 district1 = District(
     name="Craigside School District",
@@ -62,44 +62,7 @@ for i in data:
 session.commit()
 print "Added schools"
     
-##school1 = School(
-##    name="Craigside Elementary School",
-##    type="ES",
-##    principal="Catherine Cook",
-##    address="15 Craigside Drive",
-##    city="New York",
-##    state="NY",
-##    zip="10002",
-##    phone="(646) 784-9254",
-##    district=district1)
-##session.add(school1)
-##
-##school2 = School(
-##    name="Craigside Middle School",
-##    type="MS",
-##    principal="Adam Reed",
-##    address="15 Craigside Drive",
-##    city="New York",
-##    state="NY",
-##    zip="10002",
-##    phone="(646) 784-2314",
-##    district=district1)
-##session.add(school2)
-##
-##school3 = School(
-##    name="Craigside High School",
-##    type="HS",
-##    principal="Angela Lopez",
-##    address="15 Craigside Drive",
-##    city="New York",
-##    state="NY",
-##    zip="10002",
-##    phone="(646) 784-8034",
-##    district=district1)
-##session.add(school3)
-
 schools = session.query(School).filter_by(district_id=district1.id).all()
-##schools = [school1, school2, school3]
 es_departments = ["Kindergarten", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Art & Music"]
 hs_departments = ["English", "Mathematics", "Social Studies", "Foreign Language", "Science", "Art & Music", "Physical Education", "Home & Careers"]
 es_grades = ["K", 1, 2, 3, 4, 5]
@@ -202,19 +165,19 @@ print "Added enrollments"
 
 print "Added %s" % district1.name
 
-with open('help_topics.csv', 'rb') as f:
-    reader = csv.reader(f)
-    data = list(reader)
-
-for i in data:
-    helpTopic = HelpTopic(
-        help_id = i[0],
-        window = i[1],
-        element = i[2],
-        text = i[3],
-    )
-    session.add(helpTopic)
-session.commit()
-print "Added help topics"
+##with open('help_topics.csv', 'rb') as f:
+##    reader = csv.reader(f)
+##    data = list(reader)
+##
+##for i in data:
+##    helpTopic = HelpTopic(
+##        help_id = i[0],
+##        window = i[1],
+##        element = i[2],
+##        text = i[3],
+##    )
+##    session.add(helpTopic)
+##session.commit()
+##print "Added help topics"
 
 session.close()
