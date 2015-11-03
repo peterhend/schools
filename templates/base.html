@@ -4,9 +4,10 @@
 {{super()}}
 <link rel="stylesheet" href="{{url_for('.static', filename='styles.css')}}">
 <style>
+h4 {color:#337AB7;}
 .details {font-size:85%; }
 .popover {background: #EBF2F5;}
-}</style>
+</style>
 {% endblock %}
 
 {% block scripts %}
@@ -17,20 +18,21 @@ $(document).ready(function(){
       $('[data-toggle="popover"]').popover();
     }
 });
-function setHelpText() {
-    document.getElementById("helpText").innerHTML = arguments[0];
+function setHelpText(title, body) {
+    document.getElementById("modalTitle").innerHTML = title;
+    document.getElementById("helpText").innerHTML = body;
 }
 </script>
 {% endblock %}
 
 {% block navbar %}
 <!-- Modal -->
-<div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Help</h4>
+        <h4 class="modal-title" id="modalTitle">Help</h4>
       </div>
       <div class="modal-body" id="helpText">
       </div>
