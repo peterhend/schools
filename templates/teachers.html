@@ -6,35 +6,14 @@
 <h3>Teachers at {{school.name}}</h3>
 <table class="table table-striped">
 {% for teacher in teachers %}
-<tr>
-	<td>
-		<table style="width:50%">
-			<tr>
-				<td style="width:50%"><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></td>
-				<td style="width:50%; margin-left:50px;">{{teacher.email}}</td>
-			</tr>
-			<tr>
-				<td style="width:50%">{{teacher.department}}</td>
-				<td style="width:50%; margin-left:50px;">{{teacher.phone}}</td>
-			</tr>
-		</table>
-	</td>
-</tr>
-{% endfor %}
-</table>
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-{% for teacher in teachers %}
-<div class="container">
+<div class="container-fluid">
     <!--Row with two equal columns-->
     <div class="row" style="border-top: 1px solid #d0d0d0; padding-top: 5px;">
         <div class="col-sm-6"><a href='{{url_for('showTeacher', district_id=district_id, school_id=school.id, teacher_id=teacher.id)}}'>{{teacher.last_name}}, {{teacher.first_name}}</a></div>
         <div class="col-sm-6">{{teacher.email}}</div>
     </div>
     <div class="row" style="padding-bottom: 5px;">
-        <div class="col-sm-6" style="font-size:85%;">{{teacher.department}}</div>
+        <div class="col-sm-6">{{teacher.department}}</div>
         <div class="col-sm-6">{{teacher.phone}}</div>
     </div>
 </div>

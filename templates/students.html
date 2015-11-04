@@ -7,6 +7,18 @@
 
 <table class="table table-striped" style="width:50%">
 {% for student in students %}
+<div class="container-fluid">
+    <!--Row with two equal columns-->
+    <div class="row" style="border-top: 1px solid #d0d0d0; padding-top: 5px;">
+        <div class="col-sm-6"><a href='{{url_for('showStudent', district_id=district_id, school_id=school.id, student_id=student.id)}}'>{{student.last_name}}, {{student.first_name}}</a></div>
+        <div class="col-sm-6">{{student.email}}</div>
+    </div>
+    <div class="row" style="padding-bottom: 5px;">
+        <div class="col-sm-6">Grade {{student.grade}}</div>
+        <div class="col-sm-6">{{student.phone}}</div>
+    </div>
+</div>
+
 <tr>
 	<td>
 		<table style="width:100%">
