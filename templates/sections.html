@@ -8,13 +8,13 @@
 <div class="container-fluid">
     <!--Row with two equal columns-->
     <div class="row" style="border-top: 1px solid #d0d0d0; padding-top: 5px; padding-bottom: 5px; background-color: #E0E0E0;">
-        <div class="col-xs-6">Section</div>
-        <div class="col-xs-6">Teacher</div>
+        <div class="col-sm-6">Section</div>
+        <div class="col-sm-6">Teacher</div>
     </div>
 	{% for section in sections %}
 	    <div class="row" style="border-top: 1px solid #d0d0d0; padding-top: 5px; padding-bottom: 5px;">
-	        <div class="col-xs-6"><a href='{{url_for('showSection', district_id=district_id, school_id=school.id, section_id=section.id)}}'>{{section.name}}</a></div>
-	        <div class="col-xs-6">{{section.teacher.last_name}}, {{section.teacher.first_name}}</div>
+	        <div class="col-sm-6"><a href='{{url_for('showSection', district_id=district_id, school_id=school.id, section_id=section.id)}}'>{{section.name}}</a></div>
+	        <div class="col-sm-6">{{section.teacher.last_name}}, {{section.teacher.first_name}}</div>
 	    </div>
 	{% endfor %}
 </div>

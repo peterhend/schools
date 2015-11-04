@@ -7,11 +7,13 @@
 Phone: {{student.phone}}</p>
 
 <h4>Sections</h4>
-<table class="table table-striped" style="width:50%">
-{% for section in sections %}
-<tr>
-	<td><a href='{{url_for('showSection', district_id=district_id, school_id=school_id, section_id=section.id)}}'>{{section.name}}</a></td>
-</tr>
-{% endfor %}
-</table>
+<div class="container-fluid">
+	{% for section in sections %}
+	    <div class="row" style="border-top: 1px solid #d0d0d0; padding-top: 5px; padding-bottom: 5px;">
+	        <div class="col-sm-6"><a href='{{url_for('showSection', district_id=district_id, school_id=school_id, section_id=section.id)}}'>{{section.name}}</a></div>
+	        <div class="col-sm-6">{{section.teacher.last_name}}, {{section.teacher.first_name}}</div>
+	    </div>
+	{% endfor %}
+</div>
+
 {% endblock %}
