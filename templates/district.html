@@ -7,10 +7,10 @@
 Address: {{district.address}}, {{district.city}}, {{district.state}} {{district.zip}}<br>
 Phone: {{district.phone}}</p>
 
-<table class="table table-striped" style="width:0">
+<table class="table table-striped" style="width:100%">
 {% for school in schools %}
 	<tr>
-		<td style="padding-right:100px;"><a href='{{url_for('showSchool', district_id=school.district_id, school_id=school.id)}}'>{{school.name}}</a></td>
+		<td style="padding-right:100px;"><a href='{{url_for('showSchool', district_id=school.district_id, school_id=school.id)}}'>{{school.name}}</a><br/>{{school.students|length}} students</td>
 	</tr>
 {% endfor %}
 </table>
