@@ -4,9 +4,14 @@
 {% block content %}
 
 <h3>{{teacher.first_name}} {{teacher.last_name}}</h3>
-<p>Address: {{teacher.address}}, {{teacher.city}}, {{teacher.state}} {{teacher.zip}}<br>
-Phone: {{teacher.phone}}</p>
-<h4>Sections</h4>
+<table>
+	<tr>
+		<td style="padding-right: 10px; "><img src="/static/person.png" height="40px"></td>
+		<td>Address: {{teacher.address}}, {{teacher.city}}, {{teacher.state}} {{teacher.zip}}<br>
+Phone: {{teacher.phone}}</td>
+	</tr>
+</table>
+<h4>Classes</h4>
 
 <div class="container-fluid">
 	{% for section in sections %}

@@ -3,9 +3,13 @@
 
 {% block content %}
 <h3>{{student.first_name}} {{student.last_name}}</h3>
-<p>Address: {{student.address}}, {{student.city}}, {{student.state}} {{student.zip}}<br>
-Phone: {{student.phone}}</p>
-
+<table>
+	<tr>
+		<td style="padding-right: 10px; "><img src="/static/person.png" height="40px"></td>
+		<td>Address: {{student.address}}, {{student.city}}, {{student.state}} {{student.zip}}<br>
+Phone: {{student.phone}}</td>
+	</tr>
+</table>
 <h4>Sections</h4>
 <div class="container-fluid">
 	{% for section in sections %}
