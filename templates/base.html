@@ -58,17 +58,23 @@ function setHelpText(title, body) {
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ url_for('helpTopics') }}">Help Authoring<span class="sr-only">(current)</span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Districts <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{url_for('showDistrict', district_id=1)}}">Craigside</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Schools <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">School 1</a></li>
-            <li><a href="#">School 2</a></li>
-            <li><a href="#">school 3</a></li>
+            <li><a href="{{url_for('showSchool', district_id=1, school_id=1)}}">Craigside Elementary</a></li>
+            <li><a href="{{url_for('showSchool', district_id=1, school_id=2)}}">Craigside Middle</a></li>
+            <li><a href="{{url_for('showSchool', district_id=1, school_id=3)}}">Craigside High</a></li>
           </ul>
         </li>
+        <li class="active"><a href="{{ url_for('helpTopics') }}">Author Help<span class="sr-only">(current)</span></a></li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <form style="display: none;" class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
