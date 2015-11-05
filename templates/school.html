@@ -1,4 +1,37 @@
 {% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<style>
+#students { display: none; }
+#teachers { display: none; }
+#sections { display: none; }
+
+@media (min-width: 786px) {
+    #students { display: table-row-group; }
+    #teachers { display: table-row-group; }
+    #sections { display: table-row-group; }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script>
+$(function() {
+    $( "#students_btn" ).click(function() {
+        $( "#students" ).toggle();
+    });
+    $( "#teachers_btn" ).click(function() {
+        $( "#teachers" ).toggle();
+    });
+    $( "#sections_btn" ).click(function() {
+        $( "#sections" ).toggle();
+    });
+});
+</script>
+{% endblock %}
+
 {% block title %} Districts {% endblock %}
 
 {% block content %}
@@ -11,5 +44,53 @@ Phone: {{school.phone}}</p>
 	<a  class="btn btn-primary" href='{{url_for('showAllStudents', district_id=district_id, school_id=school.id)}}'>Students</a>&nbsp;&nbsp;
 	<a  class="btn btn-primary" href='{{url_for('showAllTeachers', district_id=district_id, school_id=school.id)}}'>Teachers</a>&nbsp;&nbsp;
 	<a  class="btn btn-primary" href='{{url_for('showAllSections', district_id=district_id, school_id=school.id)}}'>Sections</a>
+<p>&nbsp;</p>
+
+<div class="container">
+    <div class="row" style="border-top: 1px solid #d0d0d0; padding-top: 5px;">
+        <div class="col-sm-4">
+        	<table class="table table-striped" style="width:100%">
+        		<thead>
+        			<th class="btn btn-primary" id="students_btn" style="width:100%">Students</th>
+        		</thead>
+        		<tbody id="students">
+				{% for student in school.students %}
+				<tr>
+					<td>{{student.last_name}}, {{student.first_name}}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+        </div>
+        <div class="col-sm-4">
+        	<table class="table table-striped" style="width:100%">
+        		<thead>
+        			<th class="btn btn-primary" id="teachers_btn" style="width:100%">Teachers</th>
+        		</thead>
+        		<tbody id="teachers">
+				{% for teacher in school.teachers %}
+				<tr>
+					<td>{{teacher.last_name}}, {{teacher.first_name}}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+        </div>
+        <div class="col-sm-4">
+        	<table class="table table-striped" style="width:100%">
+        		<thead>
+        			<th class="btn btn-primary" id="sections_btn" style="width:100%">Sections</th>
+        		</thead>
+        		<tbody id="sections">
+				{% for section in school.sections %}
+				<tr>
+					<td>{{section.name}}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

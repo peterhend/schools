@@ -52,7 +52,9 @@ class School(Base):
     phone = Column(String(50))
     district_id = Column(Integer, ForeignKey('district.id'))
     district = relationship('District')
+    teachers = relationship('Teacher')
     students = relationship('Student')
+    sections = relationship('Section')
 
     # Serialize function to send JSON objects in a serializable format
     @property
