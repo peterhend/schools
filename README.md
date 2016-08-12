@@ -1,1 +1,2 @@
 # schools
+Python web app built using Flask and SQLAlchemy. The app imports student and teacher enrollment data from CSV files and lets you browse the data from a responsive (Bootstrap) web client. It also defines a set of REST endpoints used by the Android client app (see other GitHub project). I built this project while enrolled in the Udacity Full Stack Foundations course using their database-driven web application model. Access the web client at: http://peterhend.pythonanywhere.com/
